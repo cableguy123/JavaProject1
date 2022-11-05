@@ -6,19 +6,27 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Action;
 import javax.swing.JButton;
-// 1.GUI구현 클래스
+import javax.swing.JTextField;
+// 1.GUI?? ???
 // 2.GUI - "0" Label
-// Button클래스,EventListener 
+// Button???,EventListener 
 class Main_GUI extends JFrame implements ActionListener {
-  // 여기서 구현해야될거는?
+  // ??? ????????
   // size,set
   JFrame frame = new JFrame("Frame Text");
+  JTextField textfield =new JTextField("����");
   JLabel label = new JLabel("0");
-  JButton btn1 = new JButton("추가");
-  JButton btn2  = new JButton("감소");
+  JLabel label2 = new JLabel("0");
+  
+  JButton btn1 = new JButton("�ǉ�");
+  JButton btn2  = new JButton("����");
+  JButton btn3 = new JButton("?");
+  JButton btn4  = new JButton("�~");
+  JButton btn5  = new JButton("clear");
+  
   Main_GUI() {
-    // super(title) 필요없어요!
-    frame.setSize(400,300);
+    // super(title) ?????!
+    frame.setSize(1000,90000);
     frame.setResizable(false);
     frame.getContentPane().setLayout(null); 
     frame.setLocationRelativeTo(null);
@@ -32,23 +40,28 @@ class Main_GUI extends JFrame implements ActionListener {
     
   };
   public void frame_label() {
-    // label 구현
+    // label ??
     
     label.setHorizontalAlignment(JLabel.CENTER);
-    label.setBounds(160,20,80,120); 
+    textfield.setBounds(160,500,80,120);
+    label.setBounds(160,20,80,120);
+    label2.setBounds(160,40,80,120);
     
-    btn1.setBounds(80,100,90,40);
-    
-    btn2.setBounds(210,100,90,40);
+    btn1.setBounds(80,120,90,40);
+    btn2.setBounds(210,120,90,40);
+    btn3.setBounds(80,200,90,40);
+    btn4.setBounds(210,200,90,40);
+    btn5.setBounds(340,200,90,40); 
+
+
+
     btn1.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         button1Method();
       }
       private void button1Method() {
-        int count = Integer.parseInt(label.getText()); // getText , setText공부
-        count += 1;
-        label.setText(String.valueOf(count));
+        label.setText(textfield.getText());
       }
     });
     btn2.addActionListener(new ActionListener() {
@@ -57,21 +70,58 @@ class Main_GUI extends JFrame implements ActionListener {
         button2Method();
       }
       private void button2Method() {
-        // 1씩 감소시키자
+        // 1? ?????
         int countMinus = Integer.parseInt(label.getText());
         countMinus -= 1;
         if(countMinus == 0) {
-          // 0이되면 더이상 감소시킬곳이없기에 
+          // 0??? ??? ????????? 
           return;
         }
         label.setText(String.valueOf(countMinus));
         
       }
     });
+    btn3.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        button3Method();
+      }
+      private void button3Method() {
+        float count = Integer.parseInt(textfield.getText()); // getText , setText??
+        float result = RateServlet.korea(count);
+        label2.setText(String.valueOf(result));
+      }
+    });
+    btn4.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        button4Method();
+      }
+      private void button4Method() {
+        float count = Integer.parseInt(textfield.getText()); // getText , setText??
+        float result = RateServlet.japen(count);
+        label2.setText(String.valueOf(result));
+      }
+    });
 
+    btn5.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        button5Method();
+      }
+      private void button5Method() {
+        label.setText(String.valueOf(0));
+        label2.setText(String.valueOf(0));
+      }
+    });
+    frame.getContentPane().add(textfield);
     frame.getContentPane().add(label);
+    frame.getContentPane().add(label2);
     frame.getContentPane().add(btn1);
     frame.getContentPane().add(btn2);
+    frame.getContentPane().add(btn3);
+    frame.getContentPane().add(btn4);
+    frame.getContentPane().add(btn5);
 
     
   }
